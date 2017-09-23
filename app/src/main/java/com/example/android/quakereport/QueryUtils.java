@@ -60,12 +60,9 @@ public final class QueryUtils {
 
                 String mag = prop.getString("mag");
                 String place = prop.getString("place");
-                String  time = prop.getString("time");
-                long timeInMillisecunds = Long.parseLong(time);
-                Date tm = new Date(timeInMillisecunds);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM DD, YYYY");
-                String toDispllay = dateFormat.format(tm);
-                Earthquake curr = new Earthquake(mag,place, toDispllay);
+                long  timeInMillisecunds = prop.getLong("time");
+
+                Earthquake curr = new Earthquake(mag,place, timeInMillisecunds);
                 earthquakes.add(curr);
 
             }
