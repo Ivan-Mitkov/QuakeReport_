@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.android.quakereport.R.id.location;
+
 /**
  * Created by ivan on 23.9.2017 г..
  */
@@ -39,10 +41,30 @@ public class QuakeAdapter extends ArrayAdapter<Earthquake>{
         TextView magnitudeView = (TextView) listItemView.findViewById(R.id.mag);
 
         magnitudeView.setText(currEartquake.getmMag());
+        //location
+        String loc = currEartquake.getmLocation();
+        int st = loc.indexOf(",");
+        int of = loc.indexOf("of");
 
-        TextView locationView = (TextView)listItemView.findViewById(R.id.location);
-        locationView.setText(currEartquake.getmLocation());
+        String country ="";
+        String place="";
+        if(st!=-1){
+            place = loc.substring(0,st);
+            country=loc.substring(st+2);
+        }
 
+        else {
+            place="Near the";
+            country=loc.substring(st+1);
+        }
+
+
+        TextView locationView = (TextView)listItemView.findViewById(location);
+        locationView.setText(place);
+
+        TextView countrView = (TextView)listItemView.findViewById(R.id.country);
+        countrView.setText(country);
+        //date
         TextView dateView = (TextView)listItemView.findViewById(R.id.date);
         TextView timeView = (TextView)listItemView.findViewById(R.id.time);
         Date tm = new Date(currEartquake.getmDate());
