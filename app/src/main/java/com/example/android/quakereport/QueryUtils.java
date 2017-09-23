@@ -4,7 +4,8 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import  java.util.Date;
+import  java.text.SimpleDateFormat;
 import java.util.ArrayList;
 /**
  * Created by ivan on 23.9.2017 г..
@@ -60,7 +61,11 @@ public final class QueryUtils {
                 String mag = prop.getString("mag");
                 String place = prop.getString("place");
                 String  time = prop.getString("time");
-                Earthquake curr = new Earthquake(mag,place, time);
+                long timeInMillisecunds = Long.parseLong(time);
+                Date tm = new Date(timeInMillisecunds);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM DD, YYYY");
+                String toDispllay = dateFormat.format(tm);
+                Earthquake curr = new Earthquake(mag,place, toDispllay);
                 earthquakes.add(curr);
 
             }
