@@ -16,11 +16,11 @@ import java.util.List;
  * Created by ivan on 23.9.2017 г..
  */
 
-public class QuakeAdapter extends ArrayAdapter<Eartquake>{
+public class QuakeAdapter extends ArrayAdapter<Earthquake>{
 
 
 
-    public QuakeAdapter ( Activity context,  List<Eartquake> earthquakes) {
+    public QuakeAdapter ( Activity context,  List<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
     }
 
@@ -32,7 +32,7 @@ public class QuakeAdapter extends ArrayAdapter<Eartquake>{
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
-        Eartquake currEartquake = getItem(position);
+        Earthquake currEartquake = getItem(position);
 
         TextView magnitudeView = (TextView) listItemView.findViewById(R.id.mag);
 

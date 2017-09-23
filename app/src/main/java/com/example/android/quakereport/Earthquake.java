@@ -4,16 +4,10 @@ package com.example.android.quakereport;
  * Created by ivan on 23.9.2017 г..
  */
 
-public class Eartquake {
+public class Earthquake {
     private String mMag;
     private String mLocation;
     private String mDate;
-
-    public Eartquake(String mMag, String mLocation, String mDate) {
-        this.mMag = mMag;
-        this.mLocation = mLocation;
-        this.mDate = mDate;
-    }
 
     public String getmMag() {
         return mMag;
@@ -36,6 +30,13 @@ public class Eartquake {
     }
 
     public void setmDate(String mDate) {
+        this.mDate = mDate;
+    }
+
+    public Earthquake(String mMag, String mLocation, String mDate) {
+
+        this.mMag = mMag;
+        this.mLocation = mLocation;
         this.mDate = mDate;
     }
 }
