@@ -8,9 +8,12 @@ public class Earthquake {
     private double mMag;
     private String mLocation;
     private long mDate;
+    private  String url;
 
-    public Earthquake(double mMag, String mLocation, long mDate) {
 
+
+    public Earthquake(double mMag, String mLocation, long mDate, String url) {
+        this.url=url;
         this.mMag = mMag;
         this.mLocation = mLocation;
         this.mDate = mDate;
@@ -38,5 +41,12 @@ public class Earthquake {
 
     public void setmDate(long mDate) {
         this.mDate = mDate;
+    }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
