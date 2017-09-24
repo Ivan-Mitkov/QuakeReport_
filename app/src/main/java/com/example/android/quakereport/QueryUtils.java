@@ -58,7 +58,7 @@ public final class QueryUtils {
                 JSONObject currQuake = ert.getJSONObject(i);
                 JSONObject prop=currQuake.getJSONObject("properties");
 
-                String mag = prop.getString("mag");
+                double mag = prop.getDouble("mag");
                 String place = prop.getString("place");
                 long  timeInMillisecunds = prop.getLong("time");
 

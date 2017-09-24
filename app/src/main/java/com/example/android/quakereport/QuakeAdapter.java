@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,10 +37,12 @@ public class QuakeAdapter extends ArrayAdapter<Earthquake>{
                     R.layout.list_item, parent, false);
         }
         Earthquake currEartquake = getItem(position);
-
+        //magitude
         TextView magnitudeView = (TextView) listItemView.findViewById(R.id.mag);
-
-        magnitudeView.setText(currEartquake.getmMag());
+        double mag = currEartquake.getmMag();
+        DecimalFormat formatter = new DecimalFormat("0.0");
+        String magnitude = formatter.format(mag);
+        magnitudeView.setText(magnitude);
         //location
         String loc = currEartquake.getmLocation();
         int st = loc.indexOf(",");
