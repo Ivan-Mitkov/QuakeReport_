@@ -38,44 +38,44 @@ public class EarthquakeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.earthquake_activity);
-        // Get a reference to the LoaderManager, in order to interact with loaders.
+            setContentView(R.layout.earthquake_activity);
+            // Get a reference to the LoaderManager, in order to interact with loaders.
 
-        LoaderManager loaderManager = getLoaderManager();
-        // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-        // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-        // because this activity implements the LoaderCallbacks interface).
-        loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+            LoaderManager loaderManager = getLoaderManager();
+            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+            // because this activity implements the LoaderCallbacks interface).
+            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
 
-        ListView earthquakeListView = (ListView)findViewById(R.id.list);
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-        earthquakeListView.setEmptyView(mEmptyStateTextView);
+            ListView earthquakeListView = (ListView)findViewById(R.id.list);
+            mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+            earthquakeListView.setEmptyView(mEmptyStateTextView);
 
-        // Create a new adapter that takes an empty list of earthquakes as input
-        adapter = new QuakeAdapter(this, new ArrayList<Earthquake>());
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        earthquakeListView.setAdapter(adapter);
+            // Create a new adapter that takes an empty list of earthquakes as input
+            adapter = new QuakeAdapter(this, new ArrayList<Earthquake>());
+            // Set the adapter on the {@link ListView}
+            // so the list can be populated in the user interface
+            earthquakeListView.setAdapter(adapter);
 
-        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current earthquake that was clicked on
+            earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    // Find the current earthquake that was clicked on
 
-                Earthquake currentEarthquake = adapter.getItem(position);
+                    Earthquake currentEarthquake = adapter.getItem(position);
 
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
+                    // Convert the String URL into a URI object (to pass into the Intent constructor)
+                    Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
 
-                // Create a new intent to view the earthquake URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                    // Create a new intent to view the earthquake URI
+                    Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
 
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
-            }
-        });
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(USGS_REQUEST_URL);
+                    // Send the intent to launch a new activity
+                    startActivity(websiteIntent);
+                }
+            });
+            EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+            task.execute(USGS_REQUEST_URL);
 
 
     }
@@ -116,6 +116,8 @@ public class EarthquakeActivity extends AppCompatActivity
     public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> data) {
         // Set empty state text to display "No earthquakes found."
         mEmptyStateTextView.setText(R.string.no_earthquakes);
+        View loadingIndicator = findViewById(R.id.progres_spinner);
+        loadingIndicator.setVisibility(View.GONE);
         // Clear the adapter of previous earthquake data
         adapter.clear();
         if(data!=null&&!data.isEmpty())
