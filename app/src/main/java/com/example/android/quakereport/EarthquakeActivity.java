@@ -26,7 +26,8 @@ import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<ArrayList<Earthquake>> {
-
+    //view for the empty state
+    private TextView mEmptyStateTextView;
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=4.5&limit=100";
@@ -47,6 +48,9 @@ public class EarthquakeActivity extends AppCompatActivity
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
 
         ListView earthquakeListView = (ListView)findViewById(R.id.list);
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        earthquakeListView.setEmptyView(mEmptyStateTextView);
+
         // Create a new adapter that takes an empty list of earthquakes as input
         adapter = new QuakeAdapter(this, new ArrayList<Earthquake>());
         // Set the adapter on the {@link ListView}
@@ -110,6 +114,8 @@ public class EarthquakeActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> data) {
+        // Set empty state text to display "No earthquakes found."
+        mEmptyStateTextView.setText(R.string.no_earthquakes);
         // Clear the adapter of previous earthquake data
         adapter.clear();
         if(data!=null&&!data.isEmpty())
